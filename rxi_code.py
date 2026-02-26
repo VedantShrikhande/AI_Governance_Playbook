@@ -7,7 +7,6 @@ Original file is located at
     https://colab.research.google.com/drive/1fnZ4mFlDzmE0L5GtpHSpth-0dbrDvEys
 """
 
-pip install streamlit pandas openpyxl networkx plotly streamlit-option-menu matplotlib
 
 import streamlit as st
 import pandas as pd
