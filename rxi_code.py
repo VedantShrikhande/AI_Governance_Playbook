@@ -282,11 +282,13 @@ elif selected == "Governance Graph":
 
     G = nx.Graph()
 
-    for index, row in risks.iterrows():
-        G.add_edge(row["AI_System_ID"], row["Risk_Type"])
+    # Add system-risk edges
+    for _, row in risks.iterrows():
+        G.add_edge(str(row["AI_System_ID"]), str(row["Risk_Type"]))
 
-    for index, row in controls.iterrows():
-        G.add_edge(row["Risk_Type"], row["Control_Name"])
+    # Add risk-control edges
+    for _, row in controls.iterrows():
+        G.add_edge(str(row["Risk_Type"]), str(row["Control_Name"]))
 
     fig, ax = plt.subplots(figsize=(12, 8))
 
@@ -294,7 +296,7 @@ elif selected == "Governance Graph":
         G,
         with_labels=True,
         node_color="lightblue",
-        node_size=2500,
+        node_size=2000,
         font_size=10
     )
 
