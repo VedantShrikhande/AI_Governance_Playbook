@@ -42,6 +42,15 @@ st.markdown("""
     background-color: white;
     padding: 15px;
     border-radius: 10px;
+    color: black !important;
+}
+
+.stMetric label {
+    color: #0A3D62 !important;
+}
+
+.stMetric div {
+    color: black !important;
 }
 
 h1, h2, h3 {
