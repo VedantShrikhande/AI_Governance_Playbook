@@ -291,22 +291,29 @@ elif selected == "Governance Graph":
 
     G = nx.Graph()
 
-    # Add system-risk edges
+    # AI System → Risk edges
     for _, row in risks.iterrows():
-        G.add_edge(str(row["AI_System_ID"]), str(row["Risk_Type"]))
+        G.add_edge(row["AI_System_ID"], row["Risk_Type"])
 
-    # Add risk-control edges
-    for _, row in controls.iterrows():
-        G.add_edge(str(row["Risk_Type"]), str(row["Control_Name"]))
+    # Risk → Control edges
+    # Map based on matching Risk_Type with Control_Type
+    for _, risk_row in risks.iterrows():
+        for _, control_row in controls.iterrows():
+            if risk_row["Risk_Type"] == control_row["Control_Type"]:
+                G.add_edge(risk_row["Risk_Type"], control_row["Control_Name"])
 
-    fig, ax = plt.subplots(figsize=(12, 8))
+    fig, ax = plt.subplots(figsize=(14, 10))
+
+    pos = nx.spring_layout(G, k=0.5)
 
     nx.draw(
         G,
+        pos,
         with_labels=True,
-        node_color="lightblue",
         node_size=2000,
-        font_size=10
+        font_size=8,
+        node_color="lightblue",
+        edge_color="gray"
     )
 
     st.pyplot(fig)
